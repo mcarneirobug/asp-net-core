@@ -18,5 +18,8 @@ namespace app_aspnet_core.Models
 		[Display(Name="Descrição")]
 		[Required(ErrorMessage ="Campo Obrigatório")]
 		public string Descricao { get; set; }
+
+		public ICollection<Despesa> Despesas { get; set; }
+
 	}
 }
