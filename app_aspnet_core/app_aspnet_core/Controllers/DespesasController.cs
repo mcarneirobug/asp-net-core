@@ -22,9 +22,17 @@ namespace app_aspnet_core.Controllers
         }
 
         // GET: Despesas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var applicationDbContext = _context.Despesa.Include(d => d.Categoria);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var applicationDbContex = _context.Despesa.Include(d => d.Categoria).Where(d => d.Descricao.Contains(searchString)).ToListAsync();
+                return View(await applicationDbContex);
+            }
+
+
             return View(await applicationDbContext.ToListAsync());
         }
 
